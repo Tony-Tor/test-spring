@@ -3,14 +3,19 @@ package com.example.demo;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "product_table")
 public class Product {
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String name;
 	private Float price;
+	
 	public Long getId() {
 		return id;
 	}

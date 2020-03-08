@@ -1,10 +1,17 @@
 package com.example.demo;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "user_table")
 public class User {
 	
 	@Id
@@ -13,6 +20,8 @@ public class User {
 	private String fullname;
 	private String login;
 	private String password;
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+	private List<Order> orders;
 	public Long getId() {
 		return id;
 	}
