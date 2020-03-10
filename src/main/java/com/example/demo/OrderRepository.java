@@ -8,4 +8,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "order", path = "order")
 public interface OrderRepository extends CrudRepository<Order, Long> {
 	public Order findById(long id);
+	public List<Order> findByUser(User user);
+	
 }

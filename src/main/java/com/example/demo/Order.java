@@ -21,8 +21,14 @@ public class Order {
 	private Long id;
 	private LocalDateTime create_at;
 	@ManyToOne
-	@JoinColumn
+	//@JoinColumn
 	private User user;
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	@OneToMany(fetch = FetchType.LAZY)
 	private List<Product> products;
 	private Float order_sum;

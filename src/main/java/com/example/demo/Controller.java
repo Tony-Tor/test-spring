@@ -19,12 +19,29 @@ public class Controller {
 	private ProductRepository productRepository;
 	@Autowired
 	private OrderRepository orderRepository;
+	@Autowired
+	private UserRepository userRepository;
 	
 	private final Logger logger = LogManager.getLogger();
 	
 	@RequestMapping(value = "/allproducts", method = RequestMethod.GET)
 	public List<Product> getAllProducts(){
 		return (List<Product>) productRepository.findAll();
+	}
+	
+	@RequestMapping(value = "/ordersofuser_{user}", method = RequestMethod.GET)
+	public List<Order> getOrderOfUser(@PathVariable Long user){
+		return orderRepository.findByUser(userRepository.findById(user.longValue()));
+	}
+	
+	@RequestMapping(value = "/getuser_{user}", method = RequestMethod.GET)
+	public User getUser(@PathVariable Long user){
+		return userRepository.findById(user.longValue());
+	}
+	
+	@RequestMapping(value = "/deleteuser_{user}", method = RequestMethod.DELETE)
+	public void deleteUser(@PathVariable Long user){
+		userRepository.deleteById(user);
 	}
 	
 	@RequestMapping(value = "/createproduct/{name}_{price}", method = RequestMethod.POST)
@@ -40,11 +57,12 @@ public class Controller {
 		return (List<Order>) orderRepository.findAll();
 	}
 	
-	@RequestMapping(value = "/createorder", method = RequestMethod.POST)
-	public void createProduct(){
+	@RequestMapping(value = "/createorder/{user}", method = RequestMethod.POST)
+	public void createProduct(@PathVariable Long user){
 		Order o = new Order();
 		o.setCreate_at(LocalDateTime.now());
 		o.setOrder_sum(0f);
+		o.setUser(userRepository.findById(user.longValue()));
 		o.setProducts(new ArrayList<Product>());
 		orderRepository.save(o);
 	}
@@ -61,5 +79,14 @@ public class Controller {
 		}
 		o.setOrder_sum(sum_price);
 		orderRepository.save(o);
+	}
+	
+	@RequestMapping(value = "/createuser/{fullname}_{login}_{password}", method = RequestMethod.POST)
+	public void createUser(@PathVariable String fullname, @PathVariable String login, @PathVariable String password){
+		User u = new User();
+		u.setFullname(fullname);
+		u.setLogin(login);
+		u.setPassword(password);
+		userRepository.save(u);
 	}
 }

@@ -20,8 +20,8 @@ public class User {
 	private String fullname;
 	private String login;
 	private String password;
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-	private List<Order> orders;
+	/*@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+	private List<Order> orders;*/
 	public Long getId() {
 		return id;
 	}
