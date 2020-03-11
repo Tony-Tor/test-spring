@@ -7,5 +7,5 @@ INSERT INTO user_table (
 	0,
 	'F F F',
 	'bilbo',
-	'cXdlcnQ='
+	'$2a$10$OCuDKAORiW2Bw9nAwijwQeQAEHf.U.i2KNG6OCv6U5JtrXP76VtPG'
 );
