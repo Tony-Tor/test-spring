@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "user_table")
@@ -18,6 +19,7 @@ public class User {
 	@GeneratedValue
 	private Long id;
 	private String fullname;
+	
 	private String login;
 	private String password;
 	/*@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
